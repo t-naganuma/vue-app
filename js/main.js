@@ -5,18 +5,18 @@
     data: {
       newItem: "",
       todos: [
-        // {
-        //   title: "task 1",
-        //   isDone: false,
-        // },
-        // {
-        //   title: "task 2",
-        //   isDone: false,
-        // },
-        // {
-        //   title: "task 3",
-        //   isDone: true,
-        // },
+        {
+          title: "task 1",
+          isDone: false,
+        },
+        {
+          title: "task 2",
+          isDone: false,
+        },
+        {
+          title: "task 3",
+          isDone: true,
+        },
       ],
     },
     methods: {
@@ -33,6 +33,19 @@
           this.todos.splice(index, 1);
         }
       },
+      purge: function (index) {
+        if (!confirm("delete finished?")) {
+          return;
+        }
+        this.todos = this.remaining;
+      },
     },
+    computed: {
+      remaining: function() {
+        return this.todos.filter(function(todo) {
+          return !todo.isDone;
+        });
+      }
+    }
   });
 })();
